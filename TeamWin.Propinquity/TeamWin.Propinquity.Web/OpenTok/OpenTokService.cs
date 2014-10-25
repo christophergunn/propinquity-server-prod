@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using OpenTokSDK;
+using TeamWin.Propinquity.Web.LocationUtils;
 
 namespace TeamWin.Propinquity.Web.OpenTok
 {
     public class OpenTokService : IOpenTokService
     {
+		private IList<Channel> _channels = new List<Channel>();
+
         public Session DefaultSession { get; protected set; }
 
         public OpenTokSDK.OpenTok OpenTok { get; protected set; }
@@ -45,6 +49,27 @@ namespace TeamWin.Propinquity.Web.OpenTok
 
             this.DefaultSession = this.OpenTok.CreateSession();
         }
+
+		public void AssignChannel(Client client)
+	    {
+		    var channel = ChannelCreator.FindChannelFor(client.Location, _channels);
+
+			if (channel == null)
+			{
+				channel = new Channel(client);
+				channel.Session = OpenTok.CreateSession();
+				_channels.Add(channel);
+				client.OpenTokToken = client.CurrentChannel.Session.GenerateToken();
+			}
+			else
+			{
+				if (client.CurrentChannel != channel)
+				{
+					client.CurrentChannel = channel;
+					client.OpenTokToken = client.CurrentChannel.Session.GenerateToken();
+				}
+			}
+	    }
     }
 
     public interface IOpenTokService

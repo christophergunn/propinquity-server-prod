@@ -33,13 +33,18 @@ function onSessionIdChanged(sessionId, token) {
     session.connect(apiKey, token);
 }
 
+var sessionId;
+
 $(function () {
     var uuid = getUuid();
     geoFindMe(function(lat, lon) {
         $.post(serverUrl + "client/gps", { id: uuid, lat: lat, lon: lon })
          .done(function (data) {
-            onSessionIdChanged(data.SessionId, data.Token);
-        });
+         	if (sessionId != data.SessionId) {
+         		sessionId = data.SessionId;
+		         onSessionIdChanged(data.SessionId, data.Token);
+	         }
+         });
     });
 });
 

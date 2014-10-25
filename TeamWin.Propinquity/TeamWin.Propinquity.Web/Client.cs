@@ -1,4 +1,6 @@
-﻿namespace TeamWin.Propinquity.Web
+﻿using TeamWin.Propinquity.Web.LocationUtils;
+
+namespace TeamWin.Propinquity.Web
 {
     public class Client
     {
@@ -17,5 +19,7 @@
         public Location Location { get; set; }
 
         public string OpenTokToken { get; set; }
+
+	    public Channel CurrentChannel { get; set; }
     }
 }

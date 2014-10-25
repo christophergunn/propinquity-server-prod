@@ -17,12 +17,9 @@ namespace TeamWin.Propinquity.Web
         {
             var client = _clientDataStore.UpdateClientPosition(id, lat, lon);
 
-            if (client.OpenTokToken == null)
-            {
-                client.OpenTokToken = _openTok.DefaultSession.GenerateToken();
-            }
+	        _openTok.AssignChannel(client);
 
-            return new SessionAndToken { SessionId = _openTok.DefaultSession.Id, Token = client.OpenTokToken };
+            return new SessionAndToken { SessionId = client.CurrentChannel.Session.Id, Token = client.OpenTokToken };
         }
 
         public string GetAllClients()
