@@ -46,16 +46,19 @@ namespace TeamWin.Propinquity.Web.LocationUtils
                 return client.CurrentChannel;
             }
 
-            // Am I allowed to stay in my channel? If so, return that...
-            foreach (var channelUser in client.CurrentChannel.Users.Where(x => x != client))
-            {
-                if (channelUser.Location.DistanceToInKm(client.Location) < CHANNEL_INCLUSION_THRESHOLD_KM)
-                {
-                    return client.CurrentChannel;
-                }
-            }
+            // Do I have a channel? If so, am I allowed to stay in my channel? If so, return that...
+	        if (client.CurrentChannel != null)
+	        {
+	            foreach (var channelUser in client.CurrentChannel.Users.Where(x => x != client))
+	            {
+	                if (channelUser.Location.DistanceToInKm(client.Location) < CHANNEL_INCLUSION_THRESHOLD_KM)
+	                {
+	                    return client.CurrentChannel;
+	                }
+	            }
+	        }
 
-            // otherwise look at other channels to join them
+	        // otherwise look at other channels to join them
             foreach (var channel in currentChannels.Where(c => c != client.CurrentChannel))
             {
                 foreach (var channelUser in channel.Users.Where(x => x != client))
