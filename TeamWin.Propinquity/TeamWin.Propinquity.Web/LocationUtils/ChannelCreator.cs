@@ -41,7 +41,7 @@ namespace TeamWin.Propinquity.Web.LocationUtils
 	    public static Channel FindChannelFor(Client client, IList<Channel> currentChannels)
 	    {
             // Special case: only one channel, with only me in it - return that channel
-            if (currentChannels.Count == 1 && currentChannels.First().Users.First() == client)
+            if (currentChannels.Count == 1 && currentChannels.First().Users.Count() == 1 && currentChannels.First().Users.First() == client)
             {
                 return client.CurrentChannel;
             }
