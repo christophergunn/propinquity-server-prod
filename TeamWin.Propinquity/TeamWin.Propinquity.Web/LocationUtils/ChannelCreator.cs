@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace TeamWin.Propinquity.Web.LocationUtils
 {
@@ -37,13 +38,13 @@ namespace TeamWin.Propinquity.Web.LocationUtils
             return toReturn;
         }
 
-	    public static Channel FindChannelFor(Location location, IList<Channel> currentChannels)
+	    public static Channel FindChannelFor(Client client, IList<Channel> currentChannels)
 	    {
 		    foreach (var channel in currentChannels)
 		    {
-				foreach (var channelUser in channel.Users)
+				foreach (var channelUser in channel.Users.Where(x => x != client))
 			    {
-					if (channelUser.Location.DistanceToInKm(location) < CHANNEL_INCLUSION_THRESHOLD_KM)
+					if (channelUser.Location.DistanceToInKm(client.Location) < CHANNEL_INCLUSION_THRESHOLD_KM)
 					{
 						return channel;
 					}

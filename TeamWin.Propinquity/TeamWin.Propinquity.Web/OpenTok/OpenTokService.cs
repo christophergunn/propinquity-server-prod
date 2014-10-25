@@ -52,7 +52,7 @@ namespace TeamWin.Propinquity.Web.OpenTok
 
 		public void AssignChannel(Client client)
 	    {
-		    var channel = ChannelCreator.FindChannelFor(client.Location, _channels);
+		    var channel = ChannelCreator.FindChannelFor(client, _channels);
 
 			if (channel == null)
 			{
