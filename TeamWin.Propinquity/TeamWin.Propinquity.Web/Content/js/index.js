@@ -1,6 +1,6 @@
 ﻿// Initialize an OpenTok Session object
 var session = TB.initSession(sessionId);
-var uuid = guid();
+var uuid = getUuid();
 
 // Initialize a Publisher, and place it into the element with id="publisher"
 var publisher = TB.initPublisher(apiKey, 'publisher');
