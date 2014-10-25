@@ -64,6 +64,7 @@ namespace TeamWin.Propinquity.Web.LocationUtils
                 }
             }
 
+<<<<<<< HEAD
             // Do I have a channel? If so, am I allowed to stay in my channel? If so, return that...
             if (client.CurrentChannel != null)
             {
@@ -81,6 +82,8 @@ namespace TeamWin.Propinquity.Web.LocationUtils
                     }
                 }
             }
+=======
+>>>>>>> origin/master
 
             // otherwise can't find one, so create me a new channel
             return null;
