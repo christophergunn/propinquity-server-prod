@@ -7,6 +7,7 @@
         var apiKey = '@Model.ApiKey';
         var serverUrl = '@Model.ServerUrl';
     </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//static.opentok.com/webrtc/v2.2/js/TB.min.js"></script>
 	<script src="/Content/js/crossCutting.js"></script>
@@ -14,11 +15,19 @@
     <script src="/Content/js/index.js"></script>
 </head>
 <body>
-	<h2>Propinquity - maximising wtf's/minute</h2>
+    <h2>Propinquity - maximising wtf's/minute</h2>
+    <div id="chatter">
+        
+    </div>
 	<div id="out"></div>
 
     <div id="publisher"></div>
 
     <div id="subscribers"></div>
+    <input type="text" name="message"/>
+    <button id="send">send</button>
+    <ul id="messages">
+        
+    </ul>
 </body>
 </html>
