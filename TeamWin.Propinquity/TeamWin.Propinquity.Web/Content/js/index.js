@@ -1,10 +1,6 @@
 ﻿var session;
 
 function onSessionIdChanged(sessionId, token) {
-	if (session) {
-		session.disconnect();
-	}
-
 	// Initialize an OpenTok Session object
     session = TB.initSession(sessionId);
     
