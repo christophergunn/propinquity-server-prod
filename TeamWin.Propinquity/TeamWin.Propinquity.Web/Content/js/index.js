@@ -5,13 +5,20 @@ var publisher;
 function onSessionIdChanged(sessionId, token) {
     if (session) {
         console.log('onSessionIdChanged, disconnecting the previous session...');
-        session.disconnect();
         session.on({
             sessionDisconnected: function(event) {
-                console.log("The session disconnected: " + event.reason);
-                initializeSession(sessionId, token);
+            	console.log("The session disconnected: " + event.reason);
+            	console.log("initialising a new session: " + sessionId);
+            	publisher.on({
+            		destroyed: function () {
+            			console.log("publisher motherfucking destroyed");
+            			initializeSession(sessionId, token);
+            		}
+            	});
+            	publisher.destroy();
             }
         });
+        session.disconnect();
     } else {
         console.log('onSessionIdChanged, no previous session, initializing straight away...');
         initializeSession(sessionId, token);
@@ -78,7 +85,9 @@ $(function () {
                  console.log('Posted GPS and session changed from: ' + sessionId + ', to: ' + data.SessionId + '.');
          		 sessionId = data.SessionId;
 		         onSessionIdChanged(data.SessionId, data.Token);
-	         }
+             } else {
+	             console.log("The session didn't motherfucking change");
+             }
          });
     });
 });
