@@ -79,7 +79,9 @@ $(function () {
                  console.log('Posted GPS and session changed from: ' + sessionId + ', to: ' + data.SessionId + '.');
          		 sessionId = data.SessionId;
 		         onSessionIdChanged(data.SessionId, data.Token);
-	         }
+             } else {
+	             console.log("The session didn't motherfucking change")
+             }
          });
     });
 });
