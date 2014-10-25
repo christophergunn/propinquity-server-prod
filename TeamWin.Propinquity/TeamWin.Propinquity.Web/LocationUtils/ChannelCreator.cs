@@ -40,7 +40,7 @@ namespace TeamWin.Propinquity.Web.LocationUtils
 
 	    public static Channel FindChannelFor(Client client, IList<Channel> currentChannels)
 	    {
-		    foreach (var channel in currentChannels)
+            foreach (var channel in currentChannels)
 		    {
 				foreach (var channelUser in channel.Users.Where(x => x != client))
 			    {
@@ -51,7 +51,7 @@ namespace TeamWin.Propinquity.Web.LocationUtils
 			    }
 		    }
 
-		    return null;
+            return client.CurrentChannel;
 	    }
     }
 }
