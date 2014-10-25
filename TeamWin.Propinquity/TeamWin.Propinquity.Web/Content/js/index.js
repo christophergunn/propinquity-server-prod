@@ -8,7 +8,8 @@ function onSessionIdChanged(sessionId, token) {
         session.disconnect();
         session.on({
             sessionDisconnected: function(event) {
-                console.log("The session disconnected: " + event.reason);
+            	console.log("The session disconnected: " + event.reason);
+	            console.log("initialising a new session: " + sessionId);
                 initializeSession(sessionId, token);
             }
         });
