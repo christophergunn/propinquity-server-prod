@@ -125,7 +125,6 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Views\index.cshtml" />
-    <Content Include="Content\www\css\.sass-cache\b55d94f8dc920d5109a30d0d0322cbfdd9f3e158\style.scssc" />
     <Content Include="Content\www\css\style.scss" />
     <Content Include="Content\www\lib\ionic\fonts\ionicons.eot" />
     <Content Include="Content\www\lib\ionic\fonts\ionicons.ttf" />
