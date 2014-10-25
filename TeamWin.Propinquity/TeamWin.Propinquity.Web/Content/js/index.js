@@ -1,6 +1,7 @@
 ﻿var sessionId;
 var session;
 var publisher;
+var streamIds = [];
 
 function onSessionIdChanged(sessionId, token) {
     if (session) {
@@ -36,12 +37,14 @@ function initializeSession(sessionId, token) {
     session.on({
         // This function runs when session.connect() asynchronously completes
         sessionConnected: function (event) {
-            // de dupe based on event.target.sessionId
-
-            console.log("sessionConnected: " + event.target.sessionId);
-            // Publish the publisher we initialzed earlier (this will trigger 'streamCreated' on other
-            // clients)
-            session.publish(publisher);
+        	// de dupe based on event.target.sessionId
+	        if (event.target.sessionId != sessionId) {
+		        sessionId = event.target.sessionId;
+		        console.log("sessionConnected: " + event.target.sessionId);
+		        // Publish the publisher we initialzed earlier (this will trigger 'streamCreated' on other
+		        // clients)
+		        session.publish(publisher);
+	        }
         },
 
         sessionDisconnected: function (event) {
@@ -51,18 +54,19 @@ function initializeSession(sessionId, token) {
         // This function runs when another client publishes a stream (eg. session.publish())
         streamCreated: function (event) {
             // de-dupe based on event.stream.streamId
+	        if (!contains(streamIds, event.stream.streamId)) {
+	        	streamIds.push(event.stream.streamId);
+		        console.log('streamCreated: event.stream.streamId: ' + event.stream.streamId);
 
+		        // Create a container for a new Subscriber, assign it an id using the streamId, put it inside
+		        // the element with id="subscribers"
+		        var subContainer = document.createElement('div');
+		        subContainer.id = 'stream-' + event.stream.streamId;
+		        document.getElementById('subscribers').appendChild(subContainer);
 
-            console.log('streamCreated: event.stream.streamId: ' + event.stream.streamId);
-
-            // Create a container for a new Subscriber, assign it an id using the streamId, put it inside
-            // the element with id="subscribers"
-            var subContainer = document.createElement('div');
-            subContainer.id = 'stream-' + event.stream.streamId;
-            document.getElementById('subscribers').appendChild(subContainer);
-
-            // Subscribe to the stream that caused this event, put it inside the container we just made
-            session.subscribe(event.stream, subContainer);
+		        // Subscribe to the stream that caused this event, put it inside the container we just made
+		        session.subscribe(event.stream, subContainer);
+	        }
         },
 
         signal: function(event) {
@@ -83,17 +87,17 @@ function initializeSession(sessionId, token) {
     session.connect(apiKey, token);
 
     $('button#send').on('click', function() {
-        session.signal({
-            data: 'vince|' + $('input[name=message]').val() + '|' + new Date()
-        }, function(error) {
-            if (error) {
-                console.log("signal error ("
-                             + error.code
-                             + "): " + error.reason);
-            } else {
-                console.log("signal sent.");
-            }
-        })
+	    session.signal({
+			    data: 'vince|' + $('input[name=message]').val() + '|' + new Date()
+		    }, function(error) {
+			    if (error) {
+				    console.log("signal error ("
+					    + error.code
+					    + "): " + error.reason);
+			    } else {
+				    console.log("signal sent.");
+			    }
+		    });
     });
 }
 
