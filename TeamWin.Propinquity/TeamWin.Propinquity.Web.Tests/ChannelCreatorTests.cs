@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using OpenTokSDK;
 using TeamWin.Propinquity.Web.LocationUtils;
 
 namespace TeamWin.Propinquity.Web.Tests
@@ -74,7 +75,50 @@ namespace TeamWin.Propinquity.Web.Tests
             var channelsWithTwoUsers = channels.Where(c => c.Users.Count == 2);
             Assert.That(channelsWithTwoUsers.Count(), Is.EqualTo(2));
             var channelsWithOneUser = channels.Where(c => c.Users.Count == 1);
-            Assert.That(channelsWithOneUser.Count(), Is.EqualTo(1));            
+            Assert.That(channelsWithOneUser.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void FindChannelFor_GivenTwoUsersInDifferentLocations_ShouldReturnTheCorrectChannelss()
+        {
+            var client1 = new Client("1") { Location = new Location(1, 1) };
+            var client2 = new Client("2") { Location = new Location(2, 2) };
+
+            var channel1 = new Channel(client1);
+            var channel2 = new Channel(client2);
+
+            var channels = new List<Channel>
+            {
+                channel1,
+                channel2
+            };
+
+            var foundChannelForUser1 = ChannelCreator.FindChannelFor(client1, channels);
+            var foundChannelForUser2 = ChannelCreator.FindChannelFor(client2, channels);
+
+            Assert.That(foundChannelForUser1, Is.EqualTo(channel1));
+            Assert.That(foundChannelForUser2, Is.EqualTo(channel2));
+        }
+
+        [Test]
+        public void FindChannelFor_GivenTwoUsersInDifferentRooms_WhenOneUserJoinsTheOther_TheyShouldBeInTheSameRoom_SoReturnTheSameChannel()
+        {
+            var client1 = new Client("1") { Location = new Location(1, 1) };
+            var client2 = new Client("2") { Location = new Location(1, 1) };
+
+            var channel1 = new Channel(client1);
+            var channel2 = new Channel(client2);
+
+            var channels = new List<Channel>
+            {
+                channel1,
+                channel2
+            };
+
+            var foundChannelForUser1 = ChannelCreator.FindChannelFor(client1, channels);
+            var foundChannelForUser2 = ChannelCreator.FindChannelFor(client2, channels);
+
+            Assert.That(foundChannelForUser1, Is.EqualTo(foundChannelForUser2));
         }
     }
 }

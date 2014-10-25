@@ -5,9 +5,9 @@ namespace TeamWin.Propinquity.Web.LocationUtils
 {
     public class ChannelCreator
     {
-	    private const double CHANNEL_INCLUSION_THRESHOLD_KM = 0.1;
+        private const double CHANNEL_INCLUSION_THRESHOLD_KM = 0.1;
 
-	    public IList<Channel> Create(IEnumerable<Client> clients)
+        public IList<Channel> Create(IEnumerable<Client> clients)
         {
             var toReturn = new List<Channel>();
 
@@ -38,40 +38,52 @@ namespace TeamWin.Propinquity.Web.LocationUtils
             return toReturn;
         }
 
-	    public static Channel FindChannelFor(Client client, IList<Channel> currentChannels)
-	    {
+        public static Channel FindChannelFor(Client client, IList<Channel> currentChannels)
+        {
             // Special case: only one channel, with only me in it - return that channel
             if (currentChannels.Count == 1 && currentChannels.First().Users.Count() == 1 && currentChannels.First().Users.First() == client)
             {
                 return client.CurrentChannel;
             }
 
-            // Do I have a channel? If so, am I allowed to stay in my channel? If so, return that...
-	        if (client.CurrentChannel != null)
-	        {
-	            foreach (var channelUser in client.CurrentChannel.Users.Where(x => x != client))
-	            {
-	                if (channelUser.Location.DistanceToInKm(client.Location) < CHANNEL_INCLUSION_THRESHOLD_KM)
-	                {
-	                    return client.CurrentChannel;
-	                }
-	            }
-	        }
-
-	        // otherwise look at other channels to join them
+            // otherwise look at other channels to join them
             foreach (var channel in currentChannels.Where(c => c != client.CurrentChannel))
             {
                 foreach (var channelUser in channel.Users.Where(x => x != client))
                 {
                     if (channelUser.Location.DistanceToInKm(client.Location) < CHANNEL_INCLUSION_THRESHOLD_KM)
                     {
+                        // Remove myself from the old channel
+                        client.CurrentChannel.Users.Remove(client);
+
+                        // limbo <here>
+
+                        // Join the other channel
                         return channel;
                     }
                 }
             }
 
+            // Do I have a channel? If so, am I allowed to stay in my channel? If so, return that...
+            if (client.CurrentChannel != null)
+            {
+                // Only one person in this channel
+                if (client.CurrentChannel.Users.Count == 1)
+                {
+                    return client.CurrentChannel;
+                }
+
+                foreach (var channelUser in client.CurrentChannel.Users.Where(x => x != client))
+                {
+                    if (channelUser.Location.DistanceToInKm(client.Location) < CHANNEL_INCLUSION_THRESHOLD_KM)
+                    {
+                        return client.CurrentChannel;
+                    }
+                }
+            }
+
             // otherwise can't find one, so create me a new channel
-	        return null;
-	    }
+            return null;
+        }
     }
 }
