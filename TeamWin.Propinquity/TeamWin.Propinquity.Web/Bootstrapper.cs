@@ -11,6 +11,7 @@ namespace TeamWin.Propinquity.Web
             base.ConfigureApplicationContainer(container);
 
             container.Register<OpenTokService>().AsSingleton();
+            container.Register<GpsUpdater>().AsSingleton();
         }
 	}
 }

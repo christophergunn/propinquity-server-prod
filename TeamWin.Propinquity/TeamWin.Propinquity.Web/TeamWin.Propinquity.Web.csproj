@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="ClientModule.cs" />
     <Compile Include="IndexModule.cs" />
     <Compile Include="OpenTok\OpenTokService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
