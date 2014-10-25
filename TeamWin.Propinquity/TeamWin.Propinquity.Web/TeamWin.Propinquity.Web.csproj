@@ -73,7 +73,10 @@
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="ClientModule.cs" />
+    <Compile Include="GpsUpdater.cs" />
     <Compile Include="IndexModule.cs" />
+    <Compile Include="Location.cs" />
+    <Compile Include="LocationUtils\LocationDistanceCalculator.cs" />
     <Compile Include="OpenTok\OpenTokService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
