@@ -4,7 +4,6 @@ function onSessionIdChanged(sessionId, token) {
 	// Initialize an OpenTok Session object
     session = TB.initSession(sessionId);
     
-
     // Initialize a Publisher, and place it into the element with id="publisher"
     var publisher = TB.initPublisher(apiKey, 'publisher');
 
@@ -31,6 +30,10 @@ function onSessionIdChanged(sessionId, token) {
 
             // Subscribe to the stream that caused this event, put it inside the container we just made
             session.subscribe(event.stream, subContainer);
+        },
+        
+        streamDestroyed: function(event) {
+            console.log("Stream " + event.stream.name + " ended. " + event.reason);
         }
     });
     
