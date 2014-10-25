@@ -31,7 +31,7 @@ session.on({
 
 $(function() {
 	geoFindMe(function(lat, lon) {
-		$.post("http://localhost:12116/client/gps", { id: uuid, lat: lat, lon: lon });
+		$.post("http://propinquity-server-staging.azurewebsites.net/client/gps", { id: uuid, lat: lat, lon: lon });
 	}
 	);
 });
