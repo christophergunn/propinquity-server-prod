@@ -27,8 +27,8 @@ angular.module('starter.controllers', [])
 	        // Create a container for a new Subscriber, assign it an id using the streamId, put it inside
 	        // the element with id="subscribers"
 	        var subContainer = document.createElement('div');
-	        // subContainer.id = 'stream-' + event.stream.streamId;
-	        // document.getElementById('subscribers').appendChild(subContainer);
+	        subContainer.id = 'stream-' + event.stream.streamId;
+	        document.getElementById('subscribers').appendChild(subContainer);
 
 	        // Subscribe to the stream that caused this event, put it inside the container we just made
 	        session.subscribe(event.stream, subContainer);
