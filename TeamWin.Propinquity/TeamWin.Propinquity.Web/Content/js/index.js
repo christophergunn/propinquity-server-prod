@@ -1,7 +1,12 @@
-﻿
+﻿var session;
+
 function onSessionIdChanged(sessionId, token) {
-    // Initialize an OpenTok Session object
-    var session = TB.initSession(sessionId);
+	if (session) {
+		session.disconnect();
+	}
+
+	// Initialize an OpenTok Session object
+    session = TB.initSession(sessionId);
     
 
     // Initialize a Publisher, and place it into the element with id="publisher"
@@ -14,6 +19,10 @@ function onSessionIdChanged(sessionId, token) {
             // Publish the publisher we initialzed earlier (this will trigger 'streamCreated' on other
             // clients)
             session.publish(publisher);
+        },
+        
+        sessionDisconnected: function(event) {
+        	console.log("The session disconnected: " + event.reason);
         },
 
         // This function runs when another client publishes a stream (eg. session.publish())
