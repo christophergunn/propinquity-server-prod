@@ -3,3 +3,9 @@
   padding: 10px;
   border: none;
   background: #efffff; }
+
+.pageBackground {
+	background-image: url('/Content/www/res/Default@2x~iphone.png');
+     background-position: center;
+    background-repeat: no-repeat;
+}
