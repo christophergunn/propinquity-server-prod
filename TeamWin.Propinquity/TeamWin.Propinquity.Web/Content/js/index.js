@@ -1,11 +1,16 @@
 ﻿var session;
+var publisher;
 
 function onSessionIdChanged(sessionId, token) {
+    if (session) {
+        session.unpublish(publisher);
+    }
+
 	// Initialize an OpenTok Session object
     session = TB.initSession(sessionId);
     
     // Initialize a Publisher, and place it into the element with id="publisher"
-    var publisher = TB.initPublisher(apiKey, 'publisher');
+    publisher = TB.initPublisher(apiKey, 'publisher');
 
     // Attach event handlers
     session.on({
@@ -34,6 +39,10 @@ function onSessionIdChanged(sessionId, token) {
         
         streamDestroyed: function(event) {
             console.log("Stream " + event.stream.name + " ended. " + event.reason);
+        },
+        
+        connectionDestroyed: function(event) {
+            console.log('A client disconnected. Id: ' + event.connection.connectionId);
         }
     });
     
