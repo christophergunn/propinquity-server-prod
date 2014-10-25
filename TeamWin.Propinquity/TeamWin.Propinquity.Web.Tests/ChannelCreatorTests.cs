@@ -1,12 +1,80 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NUnit.Framework;
+using TeamWin.Propinquity.Web.LocationUtils;
 
 namespace TeamWin.Propinquity.Web.Tests
 {
+    [TestFixture]
     public class ChannelCreatorTests
     {
+        [Test]
+        public void GivenOneUser_ShoudlReturnOneChannelWithThatUser()
+        {
+            var channelCreator = new ChannelCreator();
+            var userWithLocation = new Client("1") { Location = new Location(1, 2) };
+
+            var channels = channelCreator.Create(new[] { userWithLocation });
+
+            Assert.That(channels.Count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void GivenTwoUsers_CloseEnough_ShouldReturnOneChannelWithTwoUsers()
+        {
+            var channelCreator = new ChannelCreator();
+            var users = new List<Client> 
+            {
+                new Client("1") { Location = new Location(1, 2) },
+                new Client("2") { Location = new Location(1, 2.0001) }
+            };
+
+            var channels = channelCreator.Create(users);
+
+            Assert.That(channels.Count, Is.EqualTo(1));
+            Assert.That(channels.First().Users.Count, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void GivenThreeUsers_TwoCloseEnough_AndOneLoser_ShouldReturnTwoChannels()
+        {
+            var channelCreator = new ChannelCreator();
+            var users = new List<Client> 
+            {
+                new Client("1") { Location = new Location(1, 2) },
+                new Client("2") { Location = new Location(1, 2.0001) },
+                new Client("Loser") { Location = new Location(1, 2.1) }
+            };
+
+            var channels = channelCreator.Create(users);
+
+            Assert.That(channels.Count, Is.EqualTo(2));
+            var channelsWithTwoUsers = channels.Where(c => c.Users.Count == 2);
+            Assert.That(channelsWithTwoUsers.Count(), Is.EqualTo(1));
+            var channelsWithOneUser = channels.Where(c => c.Users.Count == 1);
+            Assert.That(channelsWithOneUser.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void GivenFiveUsers_TwoWithFriends_AndOneLoser_ShouldReturnThreeChannels()
+        {
+            var channelCreator = new ChannelCreator();
+            var users = new List<Client> 
+            {
+                new Client("1") { Location = new Location(1, 2) },
+                new Client("2") { Location = new Location(1, 2.0001) },
+                new Client("3") { Location = new Location(2, 2) },
+                new Client("4") { Location = new Location(2, 2.0001) },
+                new Client("Loser") { Location = new Location(1, 2.1) }
+            };
+
+            var channels = channelCreator.Create(users);
+
+            Assert.That(channels.Count, Is.EqualTo(3));
+            var channelsWithTwoUsers = channels.Where(c => c.Users.Count == 2);
+            Assert.That(channelsWithTwoUsers.Count(), Is.EqualTo(2));
+            var channelsWithOneUser = channels.Where(c => c.Users.Count == 1);
+            Assert.That(channelsWithOneUser.Count(), Is.EqualTo(1));            
+        }
     }
 }
