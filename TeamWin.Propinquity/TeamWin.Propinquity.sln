@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamWin.Propinquity.Web", "TeamWin.Propinquity.Web\TeamWin.Propinquity.Web.csproj", "{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamWin.Propinquity.Web.Tests", "TeamWin.Propinquity.Web.Tests\TeamWin.Propinquity.Web.Tests.csproj", "{D73A64A2-3B5C-4E53-BB89-840B495E977E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamWin.Propinquity.Web.Test", "TeamWin.Propinquity.Web.Tests\TeamWin.Propinquity.Web.Test.csproj", "{D73A64A2-3B5C-4E53-BB89-840B495E977E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
