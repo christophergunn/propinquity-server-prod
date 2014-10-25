@@ -26,6 +26,16 @@ namespace TeamWin.Propinquity.Web
         {
             return _clientDataStore.GetAllClients();
         }
+
+        public void ProcessGpsForce(string id, string lat, string lon)
+        {
+            _clientDataStore.ForceClientPosition(id, lat, lon);
+        }
+
+        public void ProcessGpsUnforce(string id)
+        {
+            _clientDataStore.UnForceClientPosition(id);
+        }
     }
 
     public class SessionAndToken

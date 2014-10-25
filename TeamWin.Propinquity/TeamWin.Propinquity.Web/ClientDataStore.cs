@@ -29,5 +29,26 @@ namespace TeamWin.Propinquity.Web
         {
             return String.Concat(from kvp in _clients select "Id: " + kvp.Key + ", At: " + kvp.Value.Location + " <br/>");
         }
+
+        public void ForceClientPosition(string id, string lat, string lon)
+        {
+            Client client = null;
+            if (!_clients.TryGetValue(id, out client))
+                return;
+
+            var latDec = double.Parse(lat);
+            var lonDec = double.Parse(lon);
+
+            client.ForcedLocation = new Location(latDec, lonDec);
+        }
+
+        public void UnForceClientPosition(string id)
+        {
+            Client client = null;
+            if (!_clients.TryGetValue(id, out client))
+                return;
+
+            client.ForcedLocation = null;
+        }
     }
 }

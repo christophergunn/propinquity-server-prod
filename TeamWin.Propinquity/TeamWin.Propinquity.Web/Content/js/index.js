@@ -42,7 +42,7 @@ $(function () {
          .done(function (data) {
          	if (sessionId != data.SessionId) {
          		sessionId = data.SessionId;
-		         onSessionIdChanged(data.SessionId, data.Token);
+		        onSessionIdChanged(data.SessionId, data.Token);
 	         }
          });
     });

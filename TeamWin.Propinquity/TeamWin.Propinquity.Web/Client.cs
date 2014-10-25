@@ -16,7 +16,18 @@ namespace TeamWin.Propinquity.Web
             get { return _id; }
         }
 
-        public Location Location { get; set; }
+        private Location _location;
+        public Location Location
+        {
+            get { return _forcedLocation ?? _location; }
+            set { _location = value; }
+        }
+
+        private Location _forcedLocation;
+        public Location ForcedLocation
+        {
+            set { _forcedLocation = value; }
+        }
 
         public string OpenTokToken { get; set; }
 
