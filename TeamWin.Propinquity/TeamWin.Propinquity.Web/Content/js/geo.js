@@ -15,5 +15,8 @@
 	
 	output.innerHTML = "<p>Locating</p>";
 
-	navigator.geolocation.getCurrentPosition(internalSuccess, error);
+	navigator.geolocation.watchPosition(internalSuccess, error, { 
+	    enableHighAccuracy: true,
+	    maximumAge: 0
+	});
 }
