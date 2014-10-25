@@ -65,6 +65,11 @@ function initializeSession(sessionId, token) {
             session.subscribe(event.stream, subContainer);
         },
 
+        signal: function(event) {
+            var parts = event.data.split('|')
+            $('#messages').append('<li><span>' + parts[0] + ' (' + moment(parts[2]).format('h:mm:ssa')+ ')</span><p>' + parts[1]  + '</p></li>');
+        },
+
         streamDestroyed: function (event) {
             console.log("streamDestroyed: the name is " + event.stream.name + ", the reason is " + event.reason + '.');
         },
@@ -76,6 +81,20 @@ function initializeSession(sessionId, token) {
 
     // Connect to the Session using the 'apiKey' of the application and a 'token' for permission
     session.connect(apiKey, token);
+
+    $('button#send').on('click', function() {
+        session.signal({
+            data: 'vince|' + $('input[name=message]').val() + '|' + new Date()
+        }, function(error) {
+            if (error) {
+                console.log("signal error ("
+                             + error.code
+                             + "): " + error.reason);
+            } else {
+                console.log("signal sent.");
+            }
+        })
+    });
 }
 
 $(function () {
