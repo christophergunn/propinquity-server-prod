@@ -70,6 +70,7 @@ namespace TeamWin.Propinquity.Web.LocationUtils
                 }
             }
 
+
             // otherwise can't find one, so create me a new channel
 	        return null;
 	    }
