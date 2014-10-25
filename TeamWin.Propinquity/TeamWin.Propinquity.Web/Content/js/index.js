@@ -36,6 +36,8 @@ function initializeSession(sessionId, token) {
     session.on({
         // This function runs when session.connect() asynchronously completes
         sessionConnected: function (event) {
+            // de dupe based on event.target.sessionId
+
             console.log("sessionConnected: " + event.target.sessionId);
             // Publish the publisher we initialzed earlier (this will trigger 'streamCreated' on other
             // clients)
@@ -48,6 +50,9 @@ function initializeSession(sessionId, token) {
 
         // This function runs when another client publishes a stream (eg. session.publish())
         streamCreated: function (event) {
+            // de-dupe based on event.stream.streamId
+
+
             console.log('streamCreated: event.stream.streamId: ' + event.stream.streamId);
 
             // Create a container for a new Subscriber, assign it an id using the streamId, put it inside
