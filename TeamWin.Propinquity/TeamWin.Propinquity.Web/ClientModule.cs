@@ -4,11 +4,11 @@ namespace TeamWin.Propinquity.Web
 {
     public class ClientModule : Nancy.NancyModule
     {
-        private readonly GpsUpdater _gps;
+        private readonly LogicLayer _logic;
 
-        public ClientModule(GpsUpdater gps)
+        public ClientModule(LogicLayer logic)
         {
-            _gps = gps;
+            _logic = logic;
 
             Get["/client/gps/add/{id}/{lat}/{lon}"] = parameters =>
                 {
@@ -16,9 +16,9 @@ namespace TeamWin.Propinquity.Web
                     var lat = parameters.lat;
                     var lon = parameters.lon;
 
-                    _gps.UpdateClientPosition(id, lat, lon);
+                    _logic.ProcessGpsUpdate(id, lat, lon);
 
-                    return _gps.GetAllClients();
+                    return _logic.GetAllClients();
                 };
 
             Post["/client/gps"] = _ =>
@@ -27,12 +27,10 @@ namespace TeamWin.Propinquity.Web
 					var lat = Request.Form.lat;
 					var lon = Request.Form.lon;
 
-                    _gps.UpdateClientPosition(id, lat, lon);
-
-                    return 200;
+                    return _logic.ProcessGpsUpdate(id, lat, lon);
                 };
 
-            Get["/client/gps"] = _ => _gps.GetAllClients();
+            Get["/client/gps"] = _ => _logic.GetAllClients();
         }
     }
 }

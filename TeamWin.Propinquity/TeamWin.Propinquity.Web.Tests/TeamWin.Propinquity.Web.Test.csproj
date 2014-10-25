@@ -42,8 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChannelChangingAlgorithmTests.cs" />
     <Compile Include="ChannelCreatorTests.cs" />
     <Compile Include="LocationDistanceCalculatorTests.cs" />
+    <Compile Include="LogicLayerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

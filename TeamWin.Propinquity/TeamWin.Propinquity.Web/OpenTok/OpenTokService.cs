@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Configuration;
-
 using OpenTokSDK;
 
-namespace HelloWorld
+namespace TeamWin.Propinquity.Web.OpenTok
 {
-    public class OpenTokService
+    public class OpenTokService : IOpenTokService
     {
-        public Session Session { get; protected set; }
-        public OpenTok OpenTok { get; protected set; }
+        public Session DefaultSession { get; protected set; }
+
+        public OpenTokSDK.OpenTok OpenTok { get; protected set; }
 
         public OpenTokService()
         {
@@ -41,9 +41,13 @@ namespace HelloWorld
                 }
             }
 
-            this.OpenTok = new OpenTok(apiKey, apiSecret);
+            this.OpenTok = new OpenTokSDK.OpenTok(apiKey, apiSecret);
 
-            this.Session = this.OpenTok.CreateSession();
+            this.DefaultSession = this.OpenTok.CreateSession();
         }
+    }
+
+    public interface IOpenTokService
+    {
     }
 }

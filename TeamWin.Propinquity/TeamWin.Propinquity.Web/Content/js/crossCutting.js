@@ -1,21 +1,24 @@
-﻿var guid = (function () {
-	function s4() {
-		return Math.floor((1 + Math.random()) * 0x10000)
-				   .toString(16)
-				   .substring(1);
-	}
-	return function () {
-		return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-			   s4() + '-' + s4() + s4() + s4();
-	};
-})();
+﻿
 
 function getUuid() {
+    var guid = (function () {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                       .toString(16)
+                       .substring(1);
+        }
+        return function () {
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+                   s4() + '-' + s4() + s4() + s4();
+        };
+    })();
+    
     var cook = readCookie('clientId');
     if (!cook) {
         cook = guid();
         createCookie('clientId', cook, 1);
     }
+    
     return cook;
 }
 

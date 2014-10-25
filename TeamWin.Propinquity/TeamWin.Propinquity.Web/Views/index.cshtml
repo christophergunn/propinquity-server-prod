@@ -3,15 +3,14 @@
 <head>
     <meta charset="utf-8" />
     <title>Propinquity</title>
+    <script type="text/javascript">
+        var apiKey = '@Model.ApiKey';
+        var serverUrl = '@Model.ServerUrl';
+    </script>
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//static.opentok.com/webrtc/v2.2/js/TB.min.js"></script>
 	<script src="/Content/js/crossCutting.js"></script>
 	<script src="/Content/js/geo.js"></script>
-    <script type="text/javascript">
-        var apiKey = '@Model.ApiKey';
-        var sessionId = '@Model.SessionId';
-        var token = '@Model.Token';
-    </script>
     <script src="/Content/js/index.js"></script>
 </head>
 <body>

@@ -18,7 +18,5 @@ namespace TeamWin.Propinquity.Web.Tests
 
             Assert.That(distance, Is.EqualTo(LocationDistanceCalculator.DistanceTo(lat1, lon1, lat2, lon2)).Within(0.2));
         }
-
-
     }
 }

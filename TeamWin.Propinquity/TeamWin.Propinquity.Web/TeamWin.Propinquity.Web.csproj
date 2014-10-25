@@ -74,12 +74,13 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="ClientModule.cs" />
-    <Compile Include="GpsUpdater.cs" />
+    <Compile Include="ClientDataStore.cs" />
     <Compile Include="IndexModule.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="LocationUtils\Channel.cs" />
     <Compile Include="LocationUtils\ChannelCreator.cs" />
     <Compile Include="LocationUtils\LocationDistanceCalculator.cs" />
+    <Compile Include="LogicLayer.cs" />
     <Compile Include="OpenTok\OpenTokService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

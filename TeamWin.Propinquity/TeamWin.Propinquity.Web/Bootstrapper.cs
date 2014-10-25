@@ -1,4 +1,4 @@
-﻿using HelloWorld;
+﻿using TeamWin.Propinquity.Web.OpenTok;
 
 namespace TeamWin.Propinquity.Web
 {
@@ -11,7 +11,8 @@ namespace TeamWin.Propinquity.Web
             base.ConfigureApplicationContainer(container);
 
             container.Register<OpenTokService>().AsSingleton();
-            container.Register<GpsUpdater>().AsSingleton();
+            container.Register<ClientDataStore>().AsSingleton();
+            container.Register<LogicLayer>().AsSingleton();
         }
 	}
 }

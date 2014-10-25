@@ -4,16 +4,25 @@ using System.Linq;
 
 namespace TeamWin.Propinquity.Web
 {
-    public class GpsUpdater
+    public class ClientDataStore
     {
         private readonly Dictionary<string, Client> _clients = new Dictionary<string, Client>(); 
 
-        public void UpdateClientPosition(string id, string lat, string lon)
+        public Client UpdateClientPosition(string id, string lat, string lon)
         {
             var latDec = double.Parse(lat);
             var lonDec = double.Parse(lon);
 
-            _clients[id] = new Client(id) { Location = new Location(latDec, lonDec) };
+            Client client = null;
+            if (!_clients.TryGetValue(id, out client))
+            {
+                client = new Client(id);
+                _clients[id] = client;
+            }
+
+            client.Location = new Location(latDec, lonDec);
+
+            return client;
         }
 
         public string GetAllClients()

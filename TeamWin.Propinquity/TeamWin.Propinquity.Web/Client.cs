@@ -15,5 +15,7 @@
         }
 
         public Location Location { get; set; }
+
+        public string OpenTokToken { get; set; }
     }
 }

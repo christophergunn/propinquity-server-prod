@@ -1,5 +1,6 @@
-﻿using System.Dynamic;
-using HelloWorld;
+﻿using System.Configuration;
+using System.Dynamic;
+using TeamWin.Propinquity.Web.OpenTok;
 
 namespace TeamWin.Propinquity.Web
 {
@@ -14,8 +15,7 @@ namespace TeamWin.Propinquity.Web
                 dynamic locals = new ExpandoObject();
 
                 locals.ApiKey = opentokService.OpenTok.ApiKey.ToString();
-                locals.SessionId = opentokService.Session.Id;
-                locals.Token = opentokService.Session.GenerateToken();
+                locals.ServerUrl = ConfigurationManager.AppSettings["serverUrl"];
 
                 return View["index", locals];
             };
