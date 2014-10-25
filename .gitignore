@@ -181,3 +181,7 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+
+# Don't ignore libs folder
+!TeamWin.Propinquity/libs/*
+!TeamWin.Propinquity/libs/OpenTokSDK/*
