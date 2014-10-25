@@ -64,6 +64,8 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\js\crossCutting.js" />
+    <Content Include="Content\js\geo.js" />
     <Content Include="Content\js\index.js" />
     <Content Include="Content\nancy-logo.png" />
     <Content Include="Web.config" />
@@ -99,7 +101,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>51425</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:12116/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

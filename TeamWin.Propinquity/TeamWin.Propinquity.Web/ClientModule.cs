@@ -24,11 +24,11 @@ namespace TeamWin.Propinquity.Web
                     return _gps.GetAllClients();
                 };
 
-            Post["/client/gps"] = parameters =>
+            Post["/client/gps"] = _ =>
                 {
-                    var id = parameters.id;
-                    var lat = parameters.lat;
-                    var lon = parameters.lon;
+                    var id = Request.Form.id;
+					var lat = Request.Form.lat;
+					var lon = Request.Form.lon;
 
                     _gps.UpdateClientPosition(id, lat, lon);
 

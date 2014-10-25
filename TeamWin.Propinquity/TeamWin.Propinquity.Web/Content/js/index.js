@@ -1,5 +1,6 @@
 ﻿// Initialize an OpenTok Session object
 var session = TB.initSession(sessionId);
+var uuid = guid();
 
 // Initialize a Publisher, and place it into the element with id="publisher"
 var publisher = TB.initPublisher(apiKey, 'publisher');
@@ -26,6 +27,13 @@ session.on({
         session.subscribe(event.stream, subContainer);
     }
 
+});
+
+$(function() {
+	geoFindMe(function(lat, lon) {
+		$.post("http://localhost:12116/client/gps", { id: uuid, lat: lat, lon: lon });
+	}
+	);
 });
 
 // Connect to the Session using the 'apiKey' of the application and a 'token' for permission
