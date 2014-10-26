@@ -5,21 +5,21 @@ var myAvatarName;
 
 function onSessionIdChanged(sessionId, token, avatarName) {
 	myAvatarName = avatarName;
-	console.log('AvatarName is: ' + myAvatarName);
+	log('AvatarName is: ' + myAvatarName);
 	if (session) {
-        console.log('onSessionIdChanged, disconnecting the previous session...');
+        log('onSessionIdChanged, disconnecting the previous session...');
         session.off();
         session.on({
             sessionDisconnected: function (event) {
-                console.log("The session disconnected: " + event.reason);
-                console.log("initialising a new session: " + sessionId);
+                log("The session disconnected: " + event.reason);
+                log("initialising a new session: " + sessionId);
                 
             	session.off();
             	publisher.off();
                 
             	publisher.on({
             		destroyed: function () {
-            		    console.log("publisher motherfucking destroyed");
+            		    log("publisher motherfucking destroyed");
             		    publisher.off();
             			initializeSession(sessionId, token);
             		}
@@ -29,13 +29,13 @@ function onSessionIdChanged(sessionId, token, avatarName) {
         });
         session.disconnect();
     } else {
-        console.log('onSessionIdChanged, no previous session, initializing straight away...');
+        log('onSessionIdChanged, no previous session, initializing straight away...');
         initializeSession(sessionId, token);
     }
 }
 
 function initializeSession(sessionId, token) {
-    console.log('initializing session');
+    log('initializing session');
 
     // Initialize an OpenTok Session object
     session = TB.initSession(sessionId);
@@ -49,19 +49,19 @@ function initializeSession(sessionId, token) {
         sessionConnected: function (event) {
 
 		    sessionId = event.target.sessionId;
-		    console.log("sessionConnected: " + event.target.sessionId);
+		    log("sessionConnected: " + event.target.sessionId);
 		    // Publish the publisher we initialzed earlier (this will trigger 'streamCreated' on other
 		    // clients)
 		    session.publish(publisher);
         },
 
         sessionDisconnected: function (event) {
-            console.log("sessionDisconnected: " + event.reason);
+            log("sessionDisconnected: " + event.reason);
         },
 
         // This function runs when another client publishes a stream (eg. session.publish())
         streamCreated: function (event) {
-            console.log('streamCreated: event.stream.streamId: ' + event.stream.streamId);
+            log('streamCreated: event.stream.streamId: ' + event.stream.streamId);
 
 		    // Create a container for a new Subscriber, assign it an id using the streamId, put it inside
 		    // the element with id="subscribers"
@@ -79,15 +79,15 @@ function initializeSession(sessionId, token) {
         },
 
         streamDestroyed: function (event) {
-            console.log("streamDestroyed: the name is " + event.stream.name + ", the reason is " + event.reason + '.');
+            log("streamDestroyed: the name is " + event.stream.name + ", the reason is " + event.reason + '.');
         },
 
         connectionDestroyed: function (event) {
-            console.log('connectionDestroyed: connection Id: ' + event.connection.connectionId);
+            log('connectionDestroyed: connection Id: ' + event.connection.connectionId);
         }
     });
 
-    console.log('connecting');
+    log('connecting');
 
     // Connect to the Session using the 'apiKey' of the application and a 'token' for permission
     session.connect(apiKey, token);
@@ -97,11 +97,11 @@ function initializeSession(sessionId, token) {
         	data: myAvatarName + '|' + $('input[name=message]').val() + '|' + new Date()
         }, function(error) {
             if (error) {
-                console.log("signal error ("
+                log("signal error ("
                              + error.code
                              + "): " + error.reason);
             } else {
-                console.log("signal sent.");
+                log("signal sent.");
             }
         })
         $('input[name=message]').val('')
@@ -127,18 +127,18 @@ function initializeSession(sessionId, token) {
 
 $(function () {
     var uuid = getUuid();
-    console.log('Document ready, uuid is: ' + uuid + '.');
+    log('Document ready, uuid is: ' + uuid + '.');
     geoFindMe(function (lat, lon) {
-        console.log('Got GPS, lat: ' + lat + ', lon: ' + lon + '.');
+        log('Got GPS, lat: ' + lat + ', lon: ' + lon + '.');
         
         $.post(serverUrl + "client/gps", { id: uuid, lat: lat, lon: lon })
          .done(function (data) {
              if (sessionId != data.SessionId) {
-                 console.log('Posted GPS and session changed from: ' + sessionId + ', to: ' + data.SessionId + '.');
+                 log('Posted GPS and session changed from: ' + sessionId + ', to: ' + data.SessionId + '.');
                  sessionId = data.SessionId;
 		         onSessionIdChanged(data.SessionId, data.Token, data.AvatarName);
              } else {
-	             console.log("The session didn't motherfucking change");
+	             log("The session didn't motherfucking change");
              }
          });
     });
