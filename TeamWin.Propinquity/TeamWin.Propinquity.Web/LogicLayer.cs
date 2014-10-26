@@ -6,6 +6,7 @@ namespace TeamWin.Propinquity.Web
     {
         private readonly ClientDataStore _clientDataStore;
         private readonly OpenTokService _openTok;
+        private readonly object _syncLock = new object();
 
         public LogicLayer(ClientDataStore clientDataStore, OpenTokService openTok)
         {
@@ -15,11 +16,19 @@ namespace TeamWin.Propinquity.Web
 
         public SessionAndToken ProcessGpsUpdate(string id, string lat, string lon)
         {
-            var client = _clientDataStore.UpdateClientPosition(id, lat, lon);
+            lock (_syncLock)
+            {
+                var client = _clientDataStore.UpdateClientPosition(id, lat, lon);
 
-	        _openTok.AssignChannel(client);
+                _openTok.AssignChannel(client);
 
-            return new SessionAndToken { SessionId = client.CurrentChannel.Session.Id, Token = client.OpenTokToken, AvatarName = client.AvatarName};
+                return new SessionAndToken
+                    {
+                        SessionId = client.CurrentChannel.Session.Id,
+                        Token = client.OpenTokToken,
+                        AvatarName = client.AvatarName
+                    };
+            }
         }
 
         public string GetAllClients()

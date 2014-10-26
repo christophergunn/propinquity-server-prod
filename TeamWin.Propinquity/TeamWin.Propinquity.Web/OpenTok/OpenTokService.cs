@@ -51,28 +51,33 @@ namespace TeamWin.Propinquity.Web.OpenTok
             this.DefaultSession = this.OpenTok.CreateSession();
         }
 
+        private readonly object _syncLock = new object();
+
 		public void AssignChannel(Client client)
 	    {
-		    var channel = ChannelCreator.FindChannelFor(client, _channels);
+		    lock (_syncLock)
+		    {
+		        var channel = ChannelCreator.FindChannelFor(client, _channels);
 
-            Trace.WriteLine("Channel is null: " + (channel == null));
+		        Trace.WriteLine("Channel is null: " + (channel == null));
 
-			if (channel == null)
-			{
-				channel = new Channel(client);
-				channel.Session = OpenTok.CreateSession();
-				_channels.Add(channel);
-				client.OpenTokToken = client.CurrentChannel.Session.GenerateToken();
-			}
-			else
-			{
-				if (client.CurrentChannel != channel)
-				{
-					client.CurrentChannel = channel;
-					client.OpenTokToken = client.CurrentChannel.Session.GenerateToken();
-                    client.CurrentChannel.Users.Add(client);
-				}
-			}
+		        if (channel == null)
+		        {
+		            channel = new Channel(client);
+		            channel.Session = OpenTok.CreateSession();
+		            client.OpenTokToken = client.CurrentChannel.Session.GenerateToken();
+		            _channels.Add(channel);
+		        }
+		        else
+		        {
+		            if (client.CurrentChannel != channel)
+		            {
+		                client.CurrentChannel = channel;
+		                client.OpenTokToken = client.CurrentChannel.Session.GenerateToken();
+		                client.CurrentChannel.Users.Add(client);
+		            }
+		        }
+		    }
 	    }
     }
 
