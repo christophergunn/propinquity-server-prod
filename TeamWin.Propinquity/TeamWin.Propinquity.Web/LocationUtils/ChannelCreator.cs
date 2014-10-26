@@ -6,7 +6,7 @@ namespace TeamWin.Propinquity.Web.LocationUtils
 {
     public class ChannelCreator
     {
-        private const double CHANNEL_INCLUSION_THRESHOLD_KM = 0.1;
+        private const double CHANNEL_INCLUSION_THRESHOLD_KM = 0.01;
 
         public IList<Channel> Create(IEnumerable<Client> clients)
         {
