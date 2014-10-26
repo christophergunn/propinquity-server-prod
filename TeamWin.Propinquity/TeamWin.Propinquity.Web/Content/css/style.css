@@ -6215,6 +6215,9 @@ header {
 section #main #video-feeds {
   padding-bottom: 30px; }
 @media (max-width: 992px) {
+  section #main #chat {
+    clear: both; } }
+@media (max-width: 992px) {
   section #main #chat > div {
     position: fixed;
     bottom: 0px;
