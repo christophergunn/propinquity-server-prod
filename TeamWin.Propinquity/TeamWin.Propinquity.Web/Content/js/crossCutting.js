@@ -58,3 +58,8 @@ function contains(a, obj) {
 	}
 	return false;
 }
+
+function log(info) {
+    console.log(info);
+    $('#console').prepend('<li><span>' + info + '</span></li>');
+}
