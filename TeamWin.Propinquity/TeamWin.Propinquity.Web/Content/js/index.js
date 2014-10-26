@@ -62,7 +62,7 @@ function initializeSession(sessionId, token) {
 
         signal: function(event) {
             var parts = event.data.split('|')
-            $('#messages').append('<li><span>' + parts[0] + ' (' + moment(parts[2]).format('h:mm:ssa')+ ')</span><p>' + parts[1]  + '</p></li>');
+            $('#messages').prepend('<li><span>' + parts[0] + ' (' + moment(parts[2]).format('h:mm:ssa')+ ')</span><p>' + parts[1]  + '</p></li>');
         },
 
         streamDestroyed: function (event) {
@@ -89,6 +89,19 @@ function initializeSession(sessionId, token) {
                 console.log("signal sent.");
             }
         })
+        $('input[name=message]').val('')
+    });
+
+    var interval = setInterval(function() {
+        $('.OT_video-container').each(function() {
+            if ($(document).width() < 640) {
+                $(this).parent().width('100%');
+            } else if ($(document).width() < 992) {
+                $(this).parent().width('50%');
+            } else {
+                $(this).parent().width('33%');
+            };
+        });
     });
 }
 

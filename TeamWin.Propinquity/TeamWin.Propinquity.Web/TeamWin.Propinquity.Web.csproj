@@ -66,44 +66,12 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\style.css" />
     <Content Include="Content\js\crossCutting.js" />
     <Content Include="Content\js\geo.js" />
     <Content Include="Content\js\index.js" />
+    <Content Include="Content\logo.png" />
     <Content Include="Content\nancy-logo.png" />
-    <Content Include="Content\www\css\style.css" />
-    <Content Include="Content\www\img\icon.png" />
-    <Content Include="Content\www\index.html" />
-    <Content Include="Content\www\js\app.js" />
-    <Content Include="Content\www\js\controllers.js" />
-    <Content Include="Content\www\js\services.js" />
-    <Content Include="Content\www\lib\ionic\css\ionic.css" />
-    <Content Include="Content\www\lib\ionic\css\ionic.min.css" />
-    <Content Include="Content\www\lib\ionic\fonts\ionicons.svg" />
-    <Content Include="Content\www\lib\ionic\js\angular-ui\angular-ui-router.js" />
-    <Content Include="Content\www\lib\ionic\js\angular-ui\angular-ui-router.min.js" />
-    <Content Include="Content\www\lib\ionic\js\angular\angular-animate.js" />
-    <Content Include="Content\www\lib\ionic\js\angular\angular-animate.min.js" />
-    <Content Include="Content\www\lib\ionic\js\angular\angular-resource.js" />
-    <Content Include="Content\www\lib\ionic\js\angular\angular-resource.min.js" />
-    <Content Include="Content\www\lib\ionic\js\angular\angular-sanitize.js" />
-    <Content Include="Content\www\lib\ionic\js\angular\angular-sanitize.min.js" />
-    <Content Include="Content\www\lib\ionic\js\angular\angular.js" />
-    <Content Include="Content\www\lib\ionic\js\angular\angular.min.js" />
-    <Content Include="Content\www\lib\ionic\js\ionic-angular.js" />
-    <Content Include="Content\www\lib\ionic\js\ionic-angular.min.js" />
-    <Content Include="Content\www\lib\ionic\js\ionic.bundle.js" />
-    <Content Include="Content\www\lib\ionic\js\ionic.bundle.min.js" />
-    <Content Include="Content\www\lib\ionic\js\ionic.js" />
-    <Content Include="Content\www\lib\ionic\js\ionic.min.js" />
-    <Content Include="Content\www\res\Default%402x~iphone.png" />
-    <Content Include="Content\www\res\Default-568h%402x~iphone.png" />
-    <Content Include="Content\www\res\Default~iphone.png" />
-    <Content Include="Content\www\templates\friend-detail.html" />
-    <Content Include="Content\www\templates\tab-account.html" />
-    <Content Include="Content\www\templates\tab-chat.html" />
-    <Content Include="Content\www\templates\tab-friends.html" />
-    <Content Include="Content\www\templates\tab-video.html" />
-    <Content Include="Content\www\templates\tabs.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -125,48 +93,6 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Views\index.cshtml" />
-    <Content Include="Content\www\css\style.scss" />
-    <Content Include="Content\www\lib\ionic\fonts\ionicons.eot" />
-    <Content Include="Content\www\lib\ionic\fonts\ionicons.ttf" />
-    <Content Include="Content\www\lib\ionic\fonts\ionicons.woff" />
-    <Content Include="Content\www\lib\ionic\scss\ionic.scss" />
-    <Content Include="Content\www\lib\ionic\scss\ionicons\ionicons.scss" />
-    <Content Include="Content\www\lib\ionic\scss\ionicons\_ionicons-animation.scss" />
-    <Content Include="Content\www\lib\ionic\scss\ionicons\_ionicons-font.scss" />
-    <Content Include="Content\www\lib\ionic\scss\ionicons\_ionicons-icons.scss" />
-    <Content Include="Content\www\lib\ionic\scss\ionicons\_ionicons-variables.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_action-sheet.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_animations.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_backdrop.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_badge.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_bar.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_button-bar.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_button.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_checkbox.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_form.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_grid.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_items.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_list.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_loading.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_menu.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_mixins.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_modal.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_platform.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_popover.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_popup.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_progress.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_radio.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_range.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_reset.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_scaffolding.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_select.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_slide-box.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_tabs.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_toggle.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_type.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_util.scss" />
-    <Content Include="Content\www\lib\ionic\scss\_variables.scss" />
-    <Content Include="Content\www\lib\ionic\version.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -9,7 +9,7 @@
 	function internalSuccess(position) {
 		var latitude  = position.coords.latitude;
 		var longitude = position.coords.longitude;
-		output.innerHTML = "<p>Located: " + latitude + " " + longitude + "</p>";
+		output.innerHTML = "<p>Located: <span>" + latitude + "</span> <span>" + longitude + "</span></p>";
 		success(latitude, longitude);
 	};
 	

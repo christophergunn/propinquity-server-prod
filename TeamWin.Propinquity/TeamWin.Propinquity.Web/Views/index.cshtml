@@ -2,34 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <title>Propinquity</title>
     <script type="text/javascript">
         var apiKey = '@Model.ApiKey';
         var serverUrl = '@Model.ServerUrl';
     </script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment.min.js"></script>
-	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-		<script src="//static.opentok.com/webrtc/v2.2/js/TB.min.js"></script>
-	<script src="/Content/js/crossCutting.js"></script>
-	<script src="/Content/js/geo.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//static.opentok.com/webrtc/v2.2/js/TB.min.js"></script>
+    <script src="/Content/js/crossCutting.js"></script>
+    <script src="/Content/js/geo.js"></script>
     <script src="/Content/js/index.js"></script>
+    <link rel="stylesheet" href="/Content/css/style.css" />
 </head>
 <body>
-    <h2>Propinquity - maximising wtf's/minute</h2>
-    <div id="chatter">
-        
-    </div>
-	<div id="out"></div>
-
-    <div id="publisher"></div>
-
-    <div id="subscribers"></div>
-    <input type="text" name="message"/>
-    <button id="send">send</button>
-    <ul id="messages">
-        
-    </ul>
+    <header>
+        <img src="/Content/logo.png" alt="Propinquity logo" />
+        <div id="out"></div>
+    </header>
+    <section>
+        <div id="main">
+            <div id="video-feeds">
+                <div id="publisher"></div>
+                <div id="subscribers"></div>
+            </div>
+            <div id="chat">
+                <div>
+                    <input type="text" name="message" />
+                    <span><button id="send">send</button></span>
+                </div>
+                <ul id="messages"></ul>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

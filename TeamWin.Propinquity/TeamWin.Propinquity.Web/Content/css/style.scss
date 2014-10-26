@@ -1,0 +1,48 @@
+﻿@import "bootstrap";
+
+* {
+    box-sizing: border-box;
+}
+
+header {
+    text-align: center;
+    padding: 10px;
+}
+
+section {
+    @extend .container-fluid;
+    #main {
+        @extend .row;
+        #video-feeds {
+            @extend .col-md-9;
+            padding-bottom: 30px;
+        }
+        #chat {
+            @extend .col-md-3;
+            & > div {
+                @extend .input-group;
+                input {
+                    @extend .form-control;
+                }
+                span {
+                    @extend .input-group-btn;
+                    button {
+                        @extend .btn;
+                    }
+                }
+            }
+            ul {
+				border-top: #666 1px dashed;
+				margin: 20px 0;
+				padding: 15px 0;
+				list-style: none;
+                li {
+                    margin: 0px;
+                    padding: 0px;
+                    span { font-weight: bold; color: #ccc }
+                    p { font-size: 1.4em}
+                }
+            }
+        }
+    }
+}
