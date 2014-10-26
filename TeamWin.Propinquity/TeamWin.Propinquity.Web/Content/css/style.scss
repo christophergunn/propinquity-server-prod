@@ -26,6 +26,9 @@ section {
         }
         #chat {
             @extend .col-md-3;
+				@media (max-width: 992px) {
+clear: both;
+				}
             & > div {
 	            @extend .input-group;
 				@media (max-width: 992px) {
