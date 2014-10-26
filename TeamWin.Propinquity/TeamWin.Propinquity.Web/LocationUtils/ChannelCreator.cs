@@ -79,10 +79,10 @@ namespace TeamWin.Propinquity.Web.LocationUtils
                     {
                         return client.CurrentChannel;
                     }
-                    
-                    // Remove myself from the old channel
-                    client.CurrentChannel.Users.Remove(client);
                 }
+
+                // Remove myself from the old channel
+                client.CurrentChannel.Users.Remove(client);
             }
 
             // otherwise can't find one, so create me a new channel
