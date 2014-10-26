@@ -55,7 +55,7 @@ namespace TeamWin.Propinquity.Web.OpenTok
 	    {
 		    var channel = ChannelCreator.FindChannelFor(client, _channels);
 
-            Trace.WriteLine("Channel is null: " + channel == null);
+            Trace.WriteLine("Channel is null: " + (channel == null));
 
 			if (channel == null)
 			{
