@@ -67,6 +67,7 @@ namespace TeamWin.Propinquity.Web.OpenTok
 				{
 					client.CurrentChannel = channel;
 					client.OpenTokToken = client.CurrentChannel.Session.GenerateToken();
+                    client.CurrentChannel.Users.Add(client);
 				}
 			}
 	    }
