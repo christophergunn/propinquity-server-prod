@@ -121,6 +121,8 @@ function initializeSession(sessionId, token) {
             videoIndex++;
         });
     });
+
+    document.body.requestFullscreen();
 }
 
 $(function () {
