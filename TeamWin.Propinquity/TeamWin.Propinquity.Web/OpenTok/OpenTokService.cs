@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using OpenTokSDK;
 using TeamWin.Propinquity.Web.LocationUtils;
 
@@ -53,6 +54,8 @@ namespace TeamWin.Propinquity.Web.OpenTok
 		public void AssignChannel(Client client)
 	    {
 		    var channel = ChannelCreator.FindChannelFor(client, _channels);
+
+            Trace.WriteLine("Channel is null: " + channel == null);
 
 			if (channel == null)
 			{
