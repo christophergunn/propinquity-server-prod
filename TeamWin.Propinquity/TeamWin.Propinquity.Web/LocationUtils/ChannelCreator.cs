@@ -13,7 +13,7 @@ namespace TeamWin.Propinquity.Web.LocationUtils
 
             foreach (var client in clients)
             {
-                bool foundChannel = false;
+                var foundChannel = false;
 
                 foreach (var existingChannel in toReturn)
                 {
@@ -73,13 +73,16 @@ namespace TeamWin.Propinquity.Web.LocationUtils
                     return client.CurrentChannel;
                 }
 
-                foreach (var channelUser in client.CurrentChannel.Users.Where(x => x != client))
+                foreach (var channelUser in client.CurrentChannel.Users.Where(x => x != client).ToArray())
                 {
                     if (channelUser.Location.DistanceToInKm(client.Location) < CHANNEL_INCLUSION_THRESHOLD_KM)
                     {
                         return client.CurrentChannel;
                     }
                 }
+
+                // Remove myself from the old channel
+                client.CurrentChannel.Users.Remove(client);
             }
 
             // otherwise can't find one, so create me a new channel
