@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 
 namespace TeamWin.Propinquity.Web
 {
@@ -47,7 +48,18 @@ namespace TeamWin.Propinquity.Web
 					var lat = Request.Form.lat;
 					var lon = Request.Form.lon;
 
-                    return _logic.ProcessGpsUpdate(id, lat, lon);
+                    SessionAndToken st;
+
+                    try
+                    {
+                        st = _logic.ProcessGpsUpdate(id, lat, lon);
+
+                        return st;
+                    }
+                    catch (Exception e)
+                    {
+                        return e.Message;
+                    }
                 };
 
             Get["/client/gps"] = _ => _logic.GetAllClients();
