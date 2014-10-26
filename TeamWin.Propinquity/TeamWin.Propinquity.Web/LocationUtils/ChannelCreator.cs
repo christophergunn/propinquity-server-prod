@@ -72,6 +72,7 @@ namespace TeamWin.Propinquity.Web.LocationUtils
 
                         // limbo <here>
 
+
                         // Join the other channel
                         return channel;
                     }
