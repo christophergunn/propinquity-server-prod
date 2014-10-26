@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace TeamWin.Propinquity.Web.LocationUtils
@@ -41,6 +42,11 @@ namespace TeamWin.Propinquity.Web.LocationUtils
         public static Channel FindChannelFor(Client client, IList<Channel> currentChannels)
         {
             // Special case: only one channel, with only me in it - return that channel
+            if (client == null)
+                throw new ArgumentNullException("client");
+            if (currentChannels == null)
+                throw new ArgumentNullException("currentChannels");
+
             if (currentChannels.Count == 1 && currentChannels.First().Users.Count() == 1 && currentChannels.First().Users.First() == client)
             {
                 return client.CurrentChannel;
@@ -51,9 +57,17 @@ namespace TeamWin.Propinquity.Web.LocationUtils
             {
                 foreach (var channelUser in channel.Users.Where(x => x != client))
                 {
+                    if (channelUser.Location == null)
+                        throw new InvalidOperationException("Mid loop: channelUser.Location == null");
+                    if (client.Location == null)
+                        throw new InvalidOperationException("Mid loop: client.Locationn == null");
+
                     if (channelUser.Location.DistanceToInKm(client.Location) < CHANNEL_INCLUSION_THRESHOLD_KM)
                     {
                         // Remove myself from the old channel
+                        if (client.CurrentChannel == null)
+                            throw new InvalidOperationException("Mid loop: client.CurrentChannel == null");
+
                         client.CurrentChannel.Users.Remove(client);
 
                         // limbo <here>
@@ -75,11 +89,17 @@ namespace TeamWin.Propinquity.Web.LocationUtils
 
                 foreach (var channelUser in client.CurrentChannel.Users.Where(x => x != client).ToArray())
                 {
+                    if (channelUser.Location == null)
+                        throw new InvalidOperationException("Last loop: channelUser.Location == null");
+
                     if (channelUser.Location.DistanceToInKm(client.Location) < CHANNEL_INCLUSION_THRESHOLD_KM)
                     {
                         return client.CurrentChannel;
                     }
                 }
+
+                if (client.CurrentChannel == null)
+                    throw new InvalidOperationException("Last loop: client.CurrentChannel == null");
 
                 // Remove myself from the old channel
                 client.CurrentChannel.Users.Remove(client);
