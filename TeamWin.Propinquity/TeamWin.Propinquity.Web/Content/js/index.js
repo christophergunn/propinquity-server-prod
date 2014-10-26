@@ -111,13 +111,13 @@ function initializeSession(sessionId, token) {
         var totalInRoom = $('.OT_video-container').size();
         var videoIndex = 0;
         $('.OT_video-container').each(function () {
-            if ((totalInRoom == 1) ||
-                ($(document).width() < 992) ||
-                ((totalInRoom % 2 == 1) && (videoIndex == totalInRoom - 1))) {
-                $(this).parent().width('100%');
-            } else {
-                $(this).parent().width('50%').css('float', 'left');
-            };
+            //if ((totalInRoom == 1) ||
+            //    ($(document).width() < 992) ||
+            //    ((totalInRoom % 2 == 1) && (videoIndex == totalInRoom - 1))) {
+            //    $(this).parent().width('100%');
+            //} else {
+            $(this).parent().width((100 / totalInRoom) + '%').css('float', 'left');
+            //};
             videoIndex++;
         });
     });
