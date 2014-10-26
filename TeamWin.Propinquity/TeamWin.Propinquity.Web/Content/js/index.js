@@ -100,13 +100,18 @@ function initializeSession(sessionId, token) {
         $('input[name=message]').val('')
     });
 
-    var interval = setInterval(function() {
-        $('.OT_video-container').each(function() {
-            if ($(document).width() < 992) {
+    var interval = setInterval(function () {
+        var totalInRoom = $('.OT_video-container').size();
+        var videoIndex = 0;
+        $('.OT_video-container').each(function () {
+            if ((totalInRoom == 1) ||
+                ($(document).width() < 992) ||
+                ((totalInRoom % 2 == 1) && (videoIndex == totalInRoom - 1))) {
                 $(this).parent().width('100%');
             } else {
                 $(this).parent().width('50%').css('float', 'left');
             };
+            videoIndex++;
         });
     });
 }
