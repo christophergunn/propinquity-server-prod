@@ -1,9 +1,12 @@
 ﻿var sessionId;
 var session;
 var publisher;
+var myAvatarName;
 
-function onSessionIdChanged(sessionId, token) {
-    if (session) {
+function onSessionIdChanged(sessionId, token, avatarName) {
+	myAvatarName = avatarName;
+	console.log('AvatarName is: ' + myAvatarName);
+	if (session) {
         console.log('onSessionIdChanged, disconnecting the previous session...');
         session.off();
         session.on({
@@ -91,7 +94,7 @@ function initializeSession(sessionId, token) {
 
     $('button#send').on('click', function() {
         session.signal({
-            data: 'vince|' + $('input[name=message]').val() + '|' + new Date()
+        	data: myAvatarName + '|' + $('input[name=message]').val() + '|' + new Date()
         }, function(error) {
             if (error) {
                 console.log("signal error ("
@@ -131,7 +134,7 @@ $(function () {
              if (sessionId != data.SessionId) {
                  console.log('Posted GPS and session changed from: ' + sessionId + ', to: ' + data.SessionId + '.');
                  sessionId = data.SessionId;
-		         onSessionIdChanged(data.SessionId, data.Token);
+		         onSessionIdChanged(data.SessionId, data.Token, data.AvatarName);
              } else {
 	             console.log("The session didn't motherfucking change");
              }

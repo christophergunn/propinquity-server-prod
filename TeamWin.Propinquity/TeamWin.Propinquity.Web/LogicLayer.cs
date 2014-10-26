@@ -19,7 +19,7 @@ namespace TeamWin.Propinquity.Web
 
 	        _openTok.AssignChannel(client);
 
-            return new SessionAndToken { SessionId = client.CurrentChannel.Session.Id, Token = client.OpenTokToken };
+            return new SessionAndToken { SessionId = client.CurrentChannel.Session.Id, Token = client.OpenTokToken, AvatarName = client.AvatarName};
         }
 
         public string GetAllClients()
@@ -42,5 +42,6 @@ namespace TeamWin.Propinquity.Web
     {
         public string SessionId { get; set; }
         public string Token { get; set; }
+		public string AvatarName { get; set; }
     }
 }
