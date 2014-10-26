@@ -6214,20 +6214,24 @@ header {
 
 section #main #video-feeds {
   padding-bottom: 30px; }
-section #main #chat {
-  position: fixed;
-  bottom: 0px;
-  padding: 10px 20px 10px 10px; }
-  section #main #chat ul {
-    border-top: #666 1px dashed;
-    margin: 20px 0;
-    padding: 15px 0;
-    list-style: none; }
-    section #main #chat ul li {
-      margin: 0px;
-      padding: 0px; }
-      section #main #chat ul li span {
-        font-weight: bold;
-        color: #cccccc; }
-      section #main #chat ul li p {
-        font-size: 1.4em; }
+@media (max-width: 992px) {
+  section #main #chat > div {
+    position: fixed;
+    bottom: 0px;
+    padding: 10px 20px 10px 0px; } }
+section #main #chat ul {
+  border-top: #666 1px dashed;
+  margin: 20px 0;
+  padding: 15px 0;
+  list-style: none; }
+  @media (max-width: 992px) {
+    section #main #chat ul {
+      border: none; } }
+  section #main #chat ul li {
+    margin: 0px;
+    padding: 0px; }
+    section #main #chat ul li span {
+      font-weight: bold;
+      color: #cccccc; }
+    section #main #chat ul li p {
+      font-size: 1.4em; }

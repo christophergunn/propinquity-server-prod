@@ -26,11 +26,13 @@ section {
         }
         #chat {
             @extend .col-md-3;
-            position: fixed;
-            bottom: 0px;
-            padding: 10px 20px 10px 10px;
             & > div {
-                @extend .input-group;
+	            @extend .input-group;
+				@media (max-width: 992px) {
+						position: fixed;
+				        bottom: 0px;
+				        padding: 10px 20px 10px 0px;
+				}
                 input {
                     @extend .form-control;
                 }
@@ -43,6 +45,9 @@ section {
             }
             ul {
 				border-top: #666 1px dashed;
+				@media (max-width: 992px) {
+					border:none;
+				}
 				margin: 20px 0;
 				padding: 15px 0;
 				list-style: none;
