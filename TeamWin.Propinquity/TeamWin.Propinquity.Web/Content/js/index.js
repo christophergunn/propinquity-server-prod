@@ -136,17 +136,20 @@ $(function () {
     log('Document ready, uuid is: ' + uuid + '.');
     geoFindMe(function (lat, lon) {
         log('Got GPS, lat: ' + lat + ', lon: ' + lon + '.');
-        
-        $.post(serverUrl + "client/gps", { id: uuid, lat: lat, lon: lon })
-         .done(function (data) {
-             if (sessionId != data.SessionId) {
-                 log('Posted GPS and session changed from: ' + sessionId + ', to: ' + data.SessionId + '.');
-                 sessionId = data.SessionId;
-		         onSessionIdChanged(data.SessionId, data.Token, data.AvatarName);
-             } else {
-	             log("The session didn't motherfucking change");
-             }
-         });
+
+	    $.post(serverUrl + "client/gps", { id: uuid, lat: lat, lon: lon })
+		    .done(function(data) {
+			    if (sessionId != data.SessionId) {
+				    log('Posted GPS and session changed from: ' + sessionId + ', to: ' + data.SessionId + '.');
+				    sessionId = data.SessionId;
+				    onSessionIdChanged(data.SessionId, data.Token, data.AvatarName);
+			    } else {
+				    log("The session didn't motherfucking change");
+			    }
+		    })
+		    .fail(function(error) {
+			    log(error);
+		    });
     });
 });
 
