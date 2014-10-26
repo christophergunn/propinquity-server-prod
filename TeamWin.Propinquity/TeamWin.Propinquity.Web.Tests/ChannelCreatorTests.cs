@@ -120,5 +120,29 @@ namespace TeamWin.Propinquity.Web.Tests
 
             Assert.That(foundChannelForUser1, Is.EqualTo(foundChannelForUser2));
         }
+
+        [Test]
+        public void FindChannelFor_GivenTwoUsersInTheSameChannel_WhenOneUserLeavesTheChanel_TheyShouldBeInSeperateChannels()
+        {
+            var client1 = new Client("1") { Location = new Location(1, 1) };
+            var client2 = new Client("2") { Location = new Location(2, 2) };
+
+            var channel = new Channel(client1);
+            channel.Users.Add(client2);
+
+            client2.CurrentChannel = channel;
+
+            var channels = new List<Channel>
+            {
+                channel
+            };
+
+            var foundChannelForUser1 = ChannelCreator.FindChannelFor(client1, channels);
+            var foundChannelForUser2 = ChannelCreator.FindChannelFor(client2, channels);
+
+            Assert.That(foundChannelForUser1, Is.Null);
+            Assert.That(foundChannelForUser2, Is.Not.Null);
+            Assert.That(channel.Users.Count, Is.EqualTo(1));
+        }
     }
 }
