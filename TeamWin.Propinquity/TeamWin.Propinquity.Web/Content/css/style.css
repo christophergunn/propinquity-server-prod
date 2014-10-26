@@ -6196,6 +6196,9 @@ section #main:after,
   box-sizing: border-box;
   background: #efffff; }
 
+body {
+  overflow-y: hidden; }
+
 header {
   position: relative;
   text-align: center;
@@ -6211,11 +6214,19 @@ header {
 
 section #main #video-feeds {
   padding-bottom: 30px; }
+@media (max-width: 992px) {
+  section #main #chat > div {
+    position: fixed;
+    bottom: 0px;
+    padding: 10px 20px 10px 0px; } }
 section #main #chat ul {
   border-top: #666 1px dashed;
   margin: 20px 0;
   padding: 15px 0;
   list-style: none; }
+  @media (max-width: 992px) {
+    section #main #chat ul {
+      border: none; } }
   section #main #chat ul li {
     margin: 0px;
     padding: 0px; }
