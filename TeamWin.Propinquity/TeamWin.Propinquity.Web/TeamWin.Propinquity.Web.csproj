@@ -87,6 +87,7 @@
     <Compile Include="LocationUtils\ChannelCreator.cs" />
     <Compile Include="LocationUtils\LocationDistanceCalculator.cs" />
     <Compile Include="LogicLayer.cs" />
+    <Compile Include="NameFactory.cs" />
     <Compile Include="OpenTok\OpenTokService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

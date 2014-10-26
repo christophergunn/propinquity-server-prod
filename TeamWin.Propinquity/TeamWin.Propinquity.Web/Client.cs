@@ -11,7 +11,7 @@ namespace TeamWin.Propinquity.Web
         public Client(string id)
         {
             _id = id;
-	        _avatarName = "AVATAR";
+	        _avatarName = NameFactory.GetName();
         }
 
         public string Id
