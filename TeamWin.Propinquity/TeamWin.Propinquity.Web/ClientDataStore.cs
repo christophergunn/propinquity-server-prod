@@ -27,7 +27,7 @@ namespace TeamWin.Propinquity.Web
 
         public string GetAllClients()
         {
-			return String.Concat(from kvp in _clients select "Id: " + kvp.Key + ", At: " + kvp.Value.Location + " Session: " + kvp.Value.CurrentChannel.Session.Id + " Token: " + kvp.Value.OpenTokToken + "<br/>");
+			return String.Concat(from kvp in _clients where kvp.Value.CurrentChannel != null select "Id: " + kvp.Key + ", At: " + kvp.Value.Location + " Session: " + kvp.Value.CurrentChannel.Session.Id + " Token: " + kvp.Value.OpenTokToken + "<br/>");
         }
 
         public void ForceClientPosition(string id, string lat, string lon)
