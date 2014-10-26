@@ -65,10 +65,10 @@ namespace TeamWin.Propinquity.Web.LocationUtils
                     if (channelUser.Location.DistanceToInKm(client.Location) < CHANNEL_INCLUSION_THRESHOLD_KM)
                     {
                         // Remove myself from the old channel
-                        if (client.CurrentChannel == null)
-                            throw new InvalidOperationException("Mid loop: client.CurrentChannel == null");
-
-                        client.CurrentChannel.Users.Remove(client);
+                        if (client.CurrentChannel != null)
+                        {
+                            client.CurrentChannel.Users.Remove(client);
+                        }
 
                         // limbo <here>
 
