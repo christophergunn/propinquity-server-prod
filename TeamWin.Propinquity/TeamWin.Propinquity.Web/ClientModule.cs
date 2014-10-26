@@ -58,7 +58,7 @@ namespace TeamWin.Propinquity.Web
                     }
                     catch (Exception e)
                     {
-                        return e.Message;
+                        return e.ToString();
                     }
                 };
 
