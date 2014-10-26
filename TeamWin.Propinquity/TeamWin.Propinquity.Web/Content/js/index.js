@@ -32,6 +32,8 @@ function onSessionIdChanged(sessionId, token) {
 }
 
 function initializeSession(sessionId, token) {
+    console.log('initializing session');
+
     // Initialize an OpenTok Session object
     session = TB.initSession(sessionId);
 
@@ -81,6 +83,8 @@ function initializeSession(sessionId, token) {
             console.log('connectionDestroyed: connection Id: ' + event.connection.connectionId);
         }
     });
+
+    console.log('connecting');
 
     // Connect to the Session using the 'apiKey' of the application and a 'token' for permission
     session.connect(apiKey, token);
