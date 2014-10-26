@@ -5,13 +5,19 @@ var publisher;
 function onSessionIdChanged(sessionId, token) {
     if (session) {
         console.log('onSessionIdChanged, disconnecting the previous session...');
+        session.off();
         session.on({
-            sessionDisconnected: function(event) {
-            	console.log("The session disconnected: " + event.reason);
-            	console.log("initialising a new session: " + sessionId);
+            sessionDisconnected: function (event) {
+                console.log("The session disconnected: " + event.reason);
+                console.log("initialising a new session: " + sessionId);
+                
+            	session.off();
+            	publisher.off();
+                
             	publisher.on({
             		destroyed: function () {
-            			console.log("publisher motherfucking destroyed");
+            		    console.log("publisher motherfucking destroyed");
+            		    publisher.off();
             			initializeSession(sessionId, token);
             		}
             	});
@@ -36,10 +42,12 @@ function initializeSession(sessionId, token) {
     session.on({
         // This function runs when session.connect() asynchronously completes
         sessionConnected: function (event) {
-            console.log("sessionConnected: " + event.target.sessionId);
-            // Publish the publisher we initialzed earlier (this will trigger 'streamCreated' on other
-            // clients)
-            session.publish(publisher);
+
+		    sessionId = event.target.sessionId;
+		    console.log("sessionConnected: " + event.target.sessionId);
+		    // Publish the publisher we initialzed earlier (this will trigger 'streamCreated' on other
+		    // clients)
+		    session.publish(publisher);
         },
 
         sessionDisconnected: function (event) {
@@ -50,14 +58,14 @@ function initializeSession(sessionId, token) {
         streamCreated: function (event) {
             console.log('streamCreated: event.stream.streamId: ' + event.stream.streamId);
 
-            // Create a container for a new Subscriber, assign it an id using the streamId, put it inside
-            // the element with id="subscribers"
-            var subContainer = document.createElement('div');
-            subContainer.id = 'stream-' + event.stream.streamId;
-            document.getElementById('subscribers').appendChild(subContainer);
+		    // Create a container for a new Subscriber, assign it an id using the streamId, put it inside
+		    // the element with id="subscribers"
+		    var subContainer = document.createElement('div');
+		    subContainer.id = 'stream-' + event.stream.streamId;
+		    document.getElementById('subscribers').appendChild(subContainer);
 
-            // Subscribe to the stream that caused this event, put it inside the container we just made
-            session.subscribe(event.stream, subContainer);
+		    // Subscribe to the stream that caused this event, put it inside the container we just made
+		    session.subscribe(event.stream, subContainer);
         },
 
         signal: function(event) {
@@ -94,12 +102,10 @@ function initializeSession(sessionId, token) {
 
     var interval = setInterval(function() {
         $('.OT_video-container').each(function() {
-            if ($(document).width() < 640) {
+            if ($(document).width() < 992) {
                 $(this).parent().width('100%');
-            } else if ($(document).width() < 992) {
-                $(this).parent().width('50%');
             } else {
-                $(this).parent().width('33%');
+                $(this).parent().width('50%').css('float', 'left');
             };
         });
     });
@@ -115,7 +121,7 @@ $(function () {
          .done(function (data) {
              if (sessionId != data.SessionId) {
                  console.log('Posted GPS and session changed from: ' + sessionId + ', to: ' + data.SessionId + '.');
-         		 sessionId = data.SessionId;
+                 sessionId = data.SessionId;
 		         onSessionIdChanged(data.SessionId, data.Token);
              } else {
 	             console.log("The session didn't motherfucking change");

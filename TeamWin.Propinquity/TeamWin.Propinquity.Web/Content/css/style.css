@@ -6193,11 +6193,21 @@ section #main:after,
     display: none !important; } }
 /*# sourceMappingURL=bootstrap.css.map */
 * {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  background: #efffff; }
 
 header {
+  position: relative;
   text-align: center;
   padding: 10px; }
+  header #out {
+    font-size: 0.8em;
+    position: absolute;
+    bottom: 0px;
+    right: 10px; }
+  header img {
+    width: 172px;
+    margin: 0 auto; }
 
 section #main #video-feeds {
   padding-bottom: 30px; }

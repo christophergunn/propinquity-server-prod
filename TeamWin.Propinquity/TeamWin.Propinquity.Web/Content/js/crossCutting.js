@@ -49,3 +49,12 @@ function readCookie(name) {
 function eraseCookie(name) {
     createCookie(name, "", -1);
 }
+
+function contains(a, obj) {
+	for (var i = 0; i < a.length; i++) {
+		if (a[i] === obj) {
+			return true;
+		}
+	}
+	return false;
+}
